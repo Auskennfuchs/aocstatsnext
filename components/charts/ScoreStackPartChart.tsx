@@ -31,7 +31,7 @@ const ScoreStackPartChart = () => {
             const memberScoresP2 = calcMemberScores(members, day, "2")
             sortedMembers.forEach(({ name, completionDayLevel }) => {
                 dayScores[`${name}_1`] = dayScores[`${name}_2`] = 0
-                if (!completionDayLevel || !completionDayLevel[day] || day < 2) {
+                if (!completionDayLevel || !completionDayLevel[day]) {
                     return
                 }
                 dayScores[`${name}_1`] = (memberScoresP1.find(m => m.name === name)?.score || 0)

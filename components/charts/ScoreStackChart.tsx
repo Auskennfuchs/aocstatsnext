@@ -30,8 +30,8 @@ const ScoreStackChart = () => {
             const memberScoresP1 = calcMemberScores(members, day, "1")
             const memberScoresP2 = calcMemberScores(members, day, "2")
             sortedMembers.forEach(({ name, completionDayLevel }) => {
-                dayScores[name] = day > 2 ? ds[day - 2][name] : 0
-                if (!completionDayLevel || !completionDayLevel[day] || day < 2) {
+                dayScores[name] = day > 1 ? ds[day - 2][name] : 0
+                if (!completionDayLevel || !completionDayLevel[day] ) {
                     return
                 }
                 dayScores[name] = Number(dayScores[name]) + (memberScoresP1.find(m => m.name === name)?.score || 0) + (memberScoresP2.find(m => m.name === name)?.score || 0)

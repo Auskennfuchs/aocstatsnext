@@ -12,19 +12,15 @@ import { useState } from 'react'
 import Checkbox from './Checkbox'
 import { useAoCStats } from '../contexts/AocStatsContext'
 
-type Props = {
-    data: AoCStats
-}
-
 const DataTable: FC<PropsWithChildren> = ({ children }) => (
-    <table className='border-separate border-spacing-0'>
+    <table className='border-separate border-spacing-0 w-full'>
         {children}
     </table>
 )
 
 const DataTableHeader: FC<PropsWithChildren> = ({ children }) => (
     <thead>
-        <tr className={cx('bg-slate-800')}>
+        <tr className={cx('bg-slate-700')}>
             {children}
         </tr>
     </thead>
@@ -37,7 +33,7 @@ type DataTableHeaderCellProps = {
 }
 
 const DataTableHeaderCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({ className, children, onClick }) => (
-    <th className={cx('px-4 py-2', className)} onClick={onClick}>
+    <th className={cx('px-4 py-2 border-r-2 border-slate-900 last:border-r-0', className)} onClick={onClick}>
         {children}
     </th>
 )
@@ -48,8 +44,8 @@ const DataTableBody: FC<PropsWithChildren> = ({ children }) => (
     </tbody>
 )
 
-const DataTableCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({ children, align }) => (
-    <td className={cx('px-4', align === 'right' ? 'text-right' : null)} >
+const DataTableCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({ children, align, className }) => (
+    <td className={cx('px-4 border-r-2 border-slate-900 last:border-r-0', align === 'right' ? 'text-right' : null, className)} >
         {children}
     </td >
 )
@@ -163,8 +159,8 @@ const LeaderBoard = () => {
             </DataTableHeader>
             <DataTableBody>
                 {memberData.map(({ id, name, stars, localScore, globalScore, completionDayLevel }) => (
-                    <tr key={id}>
-                        <DataTableCell>
+                    <tr key={id} className="even:bg-slate-800">
+                        <DataTableCell className='text-center'>
                             <Checkbox checked={filteredMembers.some(m => m.id === id)} onChange={() => onCheckMember(id)} />
                         </DataTableCell>
                         <DataTableCell><span style={{ color: memberColors[name] }}>{name}</span></DataTableCell>

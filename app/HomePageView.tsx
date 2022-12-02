@@ -19,7 +19,7 @@ type Props = {
     stats: AoCStats
 }
 
-const chartComponents = [ScoreTotalChart, ScoreLineChart, ScoreLinePart1Chart, ScoreLinePart2Chart, ScorePercentageChart, ScoreStackChart, ScoreStackPartChart]
+const chartComponents = [ScoreTotalChart, ScoreStackChart,ScorePercentageChart,ScoreLineChart, ScoreStackPartChart, ScoreLinePart1Chart, ScoreLinePart2Chart, ]
 
 const HomePageView = ({ stats }: Props) => {
 

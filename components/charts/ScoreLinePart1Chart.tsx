@@ -30,7 +30,7 @@ const ScoreLinePart1Chart = () => {
             const memberScoresP1 = calcMemberScores(members, day, "1")
             sortedMembers.forEach(({ name, completionDayLevel }) => {
                 dayScores[name] = 0
-                if (!completionDayLevel || !completionDayLevel[day] || day < 2) {
+                if (!completionDayLevel || !completionDayLevel[day]) {
                     return
                 }
                 dayScores[name] = (memberScoresP1.find(m => m.name === name)?.score || 0)
