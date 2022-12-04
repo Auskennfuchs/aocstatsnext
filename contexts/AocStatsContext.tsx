@@ -9,7 +9,7 @@ export type AocStatsContext = {
 
 const aocStatsContext = createContext<AocStatsContext>({
     stats: {
-        event: 'unknown',
+        event: -1,
         maxDays: 0,
         memberColors: {},
         members: [],

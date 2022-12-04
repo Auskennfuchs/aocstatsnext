@@ -1,17 +1,17 @@
 import React, { useMemo } from 'react'
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Label, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { ScoreTooltip } from './ScoreTooltip'
 import { useMarkedMember } from './MarkedMember'
 import { useAoCStats } from '../../contexts/AocStatsContext'
 import { useChartGridContext } from '../../contexts/ChartGridContext'
-import { calcMemberScores } from '../../api/types'
+import { calcMemberTimeElapsed } from '../../api/types'
 
 interface DayScores {
     name: string
     [id: string]: number | string
 }
 
-const ScoreLineChart = () => {
+const TimeSpentDiffChart = () => {
 
     const { stats: { members, maxDays, memberColors }, filteredMembers } = useAoCStats()
 
@@ -27,14 +27,18 @@ const ScoreLineChart = () => {
         for (const idx in [...Array(Number(maxDays)).keys()]) {
             const day = Number(idx) + 1
             const dayScores: DayScores = { name: `Day ${day} ` }
-            const memberScoresP1 = calcMemberScores(members, day, "1")
-            const memberScoresP2 = calcMemberScores(members, day, "2")
+            const memberScoresP1 = calcMemberTimeElapsed(members, day, "1")
+            const memberScoresP2 = calcMemberTimeElapsed(members, day, "2")
             sortedMembers.forEach(({ name, completionDayLevel }) => {
                 dayScores[name] = 0
                 if (!completionDayLevel || !completionDayLevel[day]) {
                     return
                 }
-                dayScores[name] = (memberScoresP1.find(m => m.name === name)?.score || 0) + (memberScoresP2.find(m => m.name === name)?.score || 0)
+                const elapsed2 = memberScoresP2.find(m => m.name === name)?.score || 0
+                const elapsed1 = memberScoresP1.find(m => m.name === name)?.score || 0
+                if(elapsed1!==0 && elapsed2!==0) {
+                    dayScores[name] = elapsed2 - elapsed1
+                }
             })
 
             ds.push(dayScores)
@@ -44,10 +48,10 @@ const ScoreLineChart = () => {
 
     return (
         <>
-            <h3>Scores per day</h3>
+            <h3>Time spent between stars</h3>
             <LineChart width={containerWidth} height={45 * members.length} data={calcData}>
                 <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis unit="min"/>
                 <CartesianGrid strokeDasharray="1 3" />
                 <Tooltip content={ScoreTooltip} />
                 {sortedMembers.map(({ name }) => (
@@ -60,4 +64,4 @@ const ScoreLineChart = () => {
     )
 }
 
-export default ScoreLineChart
+export default TimeSpentDiffChart

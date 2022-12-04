@@ -14,12 +14,14 @@ import ScorePercentageChart from '../components/charts/ScorePercentageChart'
 import ScoreStackChart from '../components/charts/ScoreStackChart'
 import ScoreStackPartChart from '../components/charts/ScoreStackPartChart'
 import Link from 'next/link'
+import TimeSpentChart from '../components/charts/TimeSpentChart'
+import TimeSpentDiffChart from '../components/charts/TimeSpentDiffChart'
 
 type Props = {
     stats: AoCStats
 }
 
-const chartComponents = [ScoreTotalChart, ScoreStackChart,ScorePercentageChart,ScoreLineChart, ScoreStackPartChart, ScoreLinePart1Chart, ScoreLinePart2Chart, ]
+const chartComponents = [ScoreTotalChart, ScoreStackChart,ScorePercentageChart,ScoreLineChart, ScoreStackPartChart, ScoreLinePart1Chart, ScoreLinePart2Chart, TimeSpentChart, TimeSpentDiffChart ]
 
 const HomePageView = ({ stats }: Props) => {
 
