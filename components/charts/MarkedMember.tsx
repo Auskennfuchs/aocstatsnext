@@ -9,7 +9,8 @@ type Result = [
 export const useMarkedMember = (): Result => {
     const [markedMember, setMarkedMember] = useState<string>()
 
-    const getOpacity = (id: string | undefined) => !markedMember || markedMember === id ? 1 : 0.5
+    const getOpacity = (id: string | undefined) =>
+        !markedMember || markedMember === id ? 1 : 0.5
 
     return [markedMember, setMarkedMember, getOpacity]
 }

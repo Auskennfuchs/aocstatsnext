@@ -12,11 +12,11 @@ export interface Day {
 export type CompletionDays = Record<number, Day>
 
 export type Member = {
-    localScore: number,
-    name: string,
-    globalScore: number,
-    stars: number,
-    lastStarTs: number,
+    localScore: number
+    name: string
+    globalScore: number
+    stars: number
+    lastStarTs: number
     id: number
     completionDayLevel: CompletionDays
 }
@@ -36,29 +36,57 @@ type MemberScore = {
     score: number
 }
 
-export const calcMemberScores = (members: Member[], day: number, part: keyof Day): Array<MemberScore> => {
+export const calcMemberScores = (
+    members: Member[],
+    day: number,
+    part: keyof Day,
+): Array<MemberScore> => {
     const sm = [...members]
-        .filter(m => m.completionDayLevel[day] && m.completionDayLevel[day][part] && m.completionDayLevel[day][part]?.starTs)
-        .sort((a, b) => ((a.completionDayLevel[day] || {})[part]?.starTs || 0) - ((b.completionDayLevel[day] || {})[part]?.starTs || 0))
-        .map(m => m.name)
+        .filter(
+            (m) =>
+                m.completionDayLevel[day] &&
+                m.completionDayLevel[day][part] &&
+                m.completionDayLevel[day][part]?.starTs,
+        )
+        .sort(
+            (a, b) =>
+                ((a.completionDayLevel[day] || {})[part]?.starTs || 0) -
+                ((b.completionDayLevel[day] || {})[part]?.starTs || 0),
+        )
+        .map((m) => m.name)
     return members.map(({ name, completionDayLevel }) => {
         if (completionDayLevel[day] && completionDayLevel[day][part]) {
             return {
-                name, score: members.length - sm.indexOf(name)
+                name,
+                score: members.length - sm.indexOf(name),
             }
         }
         return { name, score: 0 }
     })
 }
 
-export const calcMemberTimeElapsed = (members: Member[], day: number, part: keyof Day): Array<MemberScore> => {
+export const calcMemberTimeElapsed = (
+    members: Member[],
+    day: number,
+    part: keyof Day,
+): Array<MemberScore> => {
     const sm = [...members]
-        .filter(m => m.completionDayLevel[day] && m.completionDayLevel[day][part] && m.completionDayLevel[day][part]?.starTs)
-        .sort((a, b) => ((a.completionDayLevel[day] || {})[part]?.starTs || 0) - ((b.completionDayLevel[day] || {})[part]?.starTs || 0))
-        .map(m => m.name)
+        .filter(
+            (m) =>
+                m.completionDayLevel[day] &&
+                m.completionDayLevel[day][part] &&
+                m.completionDayLevel[day][part]?.starTs,
+        )
+        .sort(
+            (a, b) =>
+                ((a.completionDayLevel[day] || {})[part]?.starTs || 0) -
+                ((b.completionDayLevel[day] || {})[part]?.starTs || 0),
+        )
+        .map((m) => m.name)
     return members.map(({ name, completionDayLevel }) => {
         return {
-            name, score: completionDayLevel[day]?.[part]?.elapsedTime || 0
+            name,
+            score: completionDayLevel[day]?.[part]?.elapsedTime || 0,
         }
     })
 }

@@ -13,20 +13,14 @@ const aocStatsContext = createContext<AocStatsContext>({
         maxDays: 0,
         memberColors: {},
         members: [],
-        ownerId: -1
+        ownerId: -1,
     },
     filteredMembers: [],
-    setFilteredMembers: () => null
+    setFilteredMembers: () => null,
 })
 
 export const useAoCStats = () => useContext(aocStatsContext)
 
-const Provider = aocStatsContext.Provider
-
-const AocContextProvider = ({ value, children }: { value: AocStatsContext } & PropsWithChildren) => (
-    <Provider value={value} >
-        {children}
-    </Provider>
-)
+const AocContextProvider = aocStatsContext.Provider
 
 export default AocContextProvider

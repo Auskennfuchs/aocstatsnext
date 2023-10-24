@@ -1,7 +1,14 @@
 "use client"
 
-import React, { useCallback, useEffect, useRef, useState, PropsWithChildren, FC } from 'react'
-import { ChartGridContext } from '../contexts/ChartGridContext'
+import React, {
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+    PropsWithChildren,
+    FC,
+} from "react"
+import { ChartGridContext } from "../contexts/ChartGridContext"
 
 export const ChartGridComponent: FC<PropsWithChildren> = ({ children }) => {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -10,13 +17,17 @@ export const ChartGridComponent: FC<PropsWithChildren> = ({ children }) => {
 
     useEffect(() => {
         if (containerRef.current) {
-            setContainerWidth(containerRef.current.getBoundingClientRect().width)
+            setContainerWidth(
+                containerRef.current.getBoundingClientRect().width,
+            )
         }
     }, [])
 
     const onResize = useCallback(() => {
         if (containerRef.current) {
-            setContainerWidth(containerRef.current.getBoundingClientRect().width)
+            setContainerWidth(
+                containerRef.current.getBoundingClientRect().width,
+            )
         }
     }, [])
 
@@ -24,7 +35,7 @@ export const ChartGridComponent: FC<PropsWithChildren> = ({ children }) => {
         if (containerRef.current) {
             window.addEventListener("resize", onResize)
         }
-        () => {
+        ;() => {
             window.removeEventListener("resize", onResize)
         }
     }, [onResize])
