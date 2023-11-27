@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import {
     CartesianGrid,
     Legend,
@@ -12,12 +12,22 @@ import { ScoreTooltip } from "./ScoreTooltip"
 import { useMarkedMember } from "./MarkedMember"
 import { useAoCStats } from "../../contexts/AocStatsContext"
 import { useChartGridContext } from "../../contexts/ChartGridContext"
-import { calcMemberScores } from "../../api/types"
+import { MemberScore, calcMemberScores } from "../../api/types"
+import RadioGroup from "../RadioGroup"
+import { ModeSwitchContainer } from "../ElementContainer"
 
 interface DayScores {
     name: string
     [id: string]: number | string
 }
+
+const viewOptions = [
+    { value: "total", label: "total" },
+    { value: "day1", label: "day 1" },
+    { value: "day2", label: "day 2" },
+] as const
+
+type ViewOptionsValues = (typeof viewOptions)[number]["value"]
 
 const ScoreLineChart = () => {
     const {
@@ -37,8 +47,34 @@ const ScoreLineChart = () => {
 
     const { containerWidth } = useChartGridContext()
 
+    const [mode, setMode] = useState<ViewOptionsValues>("total")
+
     const calcData = useMemo<Array<DayScores>>(() => {
         const ds: Array<DayScores> = []
+
+        const calcModeDayScore = (
+            name: string,
+            memberScoresP1: MemberScore[],
+            memberScoresP2: MemberScore[],
+        ) => {
+            switch (mode) {
+                case "total":
+                    return (
+                        (memberScoresP1.find((m) => m.name === name)?.score ||
+                            0) +
+                        (memberScoresP2.find((m) => m.name === name)?.score ||
+                            0)
+                    )
+                case "day1":
+                    return (
+                        memberScoresP1.find((m) => m.name === name)?.score || 0
+                    )
+                case "day2":
+                    return (
+                        memberScoresP2.find((m) => m.name === name)?.score || 0
+                    )
+            }
+        }
 
         for (const idx in [...Array(Number(maxDays)).keys()]) {
             const day = Number(idx) + 1
@@ -50,19 +86,31 @@ const ScoreLineChart = () => {
                 if (!completionDayLevel || !completionDayLevel[day]) {
                     return
                 }
-                dayScores[name] =
-                    (memberScoresP1.find((m) => m.name === name)?.score || 0) +
-                    (memberScoresP2.find((m) => m.name === name)?.score || 0)
+                dayScores[name] = calcModeDayScore(
+                    name,
+                    memberScoresP1,
+                    memberScoresP2,
+                )
             })
 
             ds.push(dayScores)
         }
         return ds
-    }, [maxDays, members, sortedMembers])
+    }, [maxDays, members, sortedMembers, mode])
 
     return (
         <>
-            <h3>Scores per day</h3>
+            <div className="flex gap-8 justify-between">
+                <h3>Scores per day</h3>
+                <ModeSwitchContainer>
+                    <RadioGroup
+                        name="chkScorePerDay"
+                        options={viewOptions}
+                        value={mode}
+                        onChange={setMode}
+                    />
+                </ModeSwitchContainer>
+            </div>
             <LineChart
                 width={containerWidth}
                 height={45 * members.length}

@@ -106,22 +106,23 @@ const convertStats = (rawData: any, event: number) => {
 }
 
 export const fetchAocStats = async (event: number): Promise<AoCStats> => {
+    const url = `https://adventofcode.com/${event}/leaderboard/private/view/${process.env.LEADERBOARD_ID}.json`
     try {
-        const res = await fetch(
-            `https://adventofcode.com/${event}/leaderboard/private/view/${process.env.LEADERBOARD_ID}.json`,
-            {
-                headers: {
-                    Cookie: `session=${process.env.SESSION_ID}`,
-                },
-                //                cache: "force-cache",
-                next: { revalidate: 10 },
+        const res = await fetch(url, {
+            headers: {
+                Cookie: `session=${process.env.SESSION_ID}`,
             },
-        )
-        const rawData = await res.json()
+            //                cache: "force-cache",
+            next: { revalidate: 10 },
+        })
+        if (res.status == 200) {
+            const rawData = await res.json()
 
-        return convertStats(rawData, event)
+            return convertStats(rawData, event)
+        }
+        throw new Error("unable to load stats: " + url)
     } catch (err) {
-        console.error("error fetching stat data", err)
+        console.error("error fetching stat data", url, err)
         return {
             event,
             members: [],

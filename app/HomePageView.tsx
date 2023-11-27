@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { AoCStats, Member } from "../api/types"
 import ChartGrid from "../components/ChartGrid"
 import { ChartGridComponent } from "../components/ChartGridComponent"
@@ -10,10 +10,7 @@ import ScoreTotalChart from "../components/charts/ScoreTotalChart"
 import AocContextProvider, {
     AocStatsContext,
 } from "../contexts/AocStatsContext"
-import ScoreLinePart1Chart from "../components/charts/ScoreLinePart1Chart"
-import ScoreLinePart2Chart from "../components/charts/ScoreLinePart2Chart"
 import ScorePercentageChart from "../components/charts/ScorePercentageChart"
-import ScoreStackChart from "../components/charts/ScoreStackChart"
 import ScoreStackPartChart from "../components/charts/ScoreStackPartChart"
 import Link from "next/link"
 import TimeSpentChart from "../components/charts/TimeSpentChart"
@@ -25,12 +22,9 @@ type Props = {
 
 const chartComponents = [
     ScoreTotalChart,
-    ScoreStackChart,
     ScorePercentageChart,
     ScoreLineChart,
     ScoreStackPartChart,
-    ScoreLinePart1Chart,
-    ScoreLinePart2Chart,
     TimeSpentChart,
     TimeSpentDiffChart,
 ]
@@ -71,16 +65,18 @@ const HomePageView = ({ stats }: Props) => {
                     </Link>
                 ))}
             </div>
-            <AocContextProvider value={context}>
-                <LeaderBoard />
-                <ChartGrid>
-                    {chartComponents.map((Component, idx) => (
-                        <ChartGridComponent key={idx}>
-                            <Component />
-                        </ChartGridComponent>
-                    ))}
-                </ChartGrid>
-            </AocContextProvider>
+            <div className="flex flex-col gap-8 my-8">
+                <AocContextProvider value={context}>
+                    <LeaderBoard />
+                    <ChartGrid>
+                        {chartComponents.map((Component, idx) => (
+                            <ChartGridComponent key={idx}>
+                                <Component />
+                            </ChartGridComponent>
+                        ))}
+                    </ChartGrid>
+                </AocContextProvider>
+            </div>
         </>
     )
 }

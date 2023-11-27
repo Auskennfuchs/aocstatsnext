@@ -31,7 +31,7 @@ export type AoCStats = {
     maxDays: number
 }
 
-type MemberScore = {
+export type MemberScore = {
     name: string
     score: number
 }

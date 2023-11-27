@@ -9,6 +9,7 @@ import React, {
     FC,
 } from "react"
 import { ChartGridContext } from "../contexts/ChartGridContext"
+import ElementContainer from "./ElementContainer"
 
 export const ChartGridComponent: FC<PropsWithChildren> = ({ children }) => {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -16,35 +17,43 @@ export const ChartGridComponent: FC<PropsWithChildren> = ({ children }) => {
     const [containerWidth, setContainerWidth] = useState(0)
 
     useEffect(() => {
-        if (containerRef.current) {
-            setContainerWidth(
-                containerRef.current.getBoundingClientRect().width,
-            )
+        if (!containerRef.current) {
+            return
         }
-    }, [])
-
-    const onResize = useCallback(() => {
-        if (containerRef.current) {
-            setContainerWidth(
-                containerRef.current.getBoundingClientRect().width,
-            )
-        }
+        const { paddingLeft, paddingRight } = getComputedStyle(
+            containerRef.current,
+        )
+        setContainerWidth(
+            containerRef.current.clientWidth -
+                parseFloat(paddingLeft) -
+                parseFloat(paddingRight),
+        )
     }, [])
 
     useEffect(() => {
-        if (containerRef.current) {
-            window.addEventListener("resize", onResize)
+        const onResize = () => {
+            if (containerRef.current) {
+                const { paddingLeft, paddingRight } = getComputedStyle(
+                    containerRef.current,
+                )
+                setContainerWidth(
+                    containerRef.current.clientWidth -
+                        parseFloat(paddingLeft) -
+                        parseFloat(paddingRight),
+                )
+            }
         }
-        ;() => {
+        window.addEventListener("resize", onResize)
+        return () => {
             window.removeEventListener("resize", onResize)
         }
-    }, [onResize])
+    }, [])
 
     return (
-        <div ref={containerRef}>
+        <ElementContainer ref={containerRef}>
             <ChartGridContext.Provider value={{ containerWidth }}>
                 {children}
             </ChartGridContext.Provider>
-        </div>
+        </ElementContainer>
     )
 }

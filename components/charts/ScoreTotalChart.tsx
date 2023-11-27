@@ -1,4 +1,6 @@
-import React from "react"
+"use client"
+
+import React, { useState } from "react"
 import { useMemo } from "react"
 import {
     Area,
@@ -14,17 +16,29 @@ import { useAoCStats } from "../../contexts/AocStatsContext"
 import { useChartGridContext } from "../../contexts/ChartGridContext"
 import { useMarkedMember } from "./MarkedMember"
 import { ScoreTooltip } from "./ScoreTooltip"
+import Checkbox from "../Checkbox"
+import { ModeSwitchContainer } from "../ElementContainer"
+import RadioGroup from "../RadioGroup"
 
 type DayScores = {
     name: string
     [id: string]: number | string
 }
 
+const viewOptions = [
+    { value: "normal", label: "normal" },
+    { value: "stacked", label: "stacked" },
+] as const
+
+type ViewOptionsValues = (typeof viewOptions)[number]["value"]
+
 const ScoreTotalChart = () => {
     const {
         filteredMembers,
         stats: { members, memberColors, maxDays },
     } = useAoCStats()
+
+    const [mode, setMode] = useState<ViewOptionsValues>("normal")
 
     const sortedMembers = useMemo(
         () =>
@@ -64,7 +78,17 @@ const ScoreTotalChart = () => {
 
     return (
         <>
-            <h3>Total score</h3>
+            <div className="flex gap-8 justify-between">
+                <h3>Total score</h3>
+                <ModeSwitchContainer>
+                    <RadioGroup
+                        name="chkTotalScoreMode"
+                        options={viewOptions}
+                        value={mode}
+                        onChange={setMode}
+                    />
+                </ModeSwitchContainer>
+            </div>
             <AreaChart
                 width={containerWidth}
                 height={45 * members.length}
@@ -79,7 +103,7 @@ const ScoreTotalChart = () => {
                         key={name}
                         type="monotone"
                         dataKey={name}
-                        stackId={name}
+                        stackId={mode === "stacked" ? "1" : name}
                         stroke={memberColors[name]}
                         fill={memberColors[name]}
                         fillOpacity={markedMember === name ? 0.5 : 0.03}

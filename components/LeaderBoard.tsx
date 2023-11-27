@@ -1,7 +1,7 @@
 "use client"
 
-import React, { FC, PropsWithChildren, useEffect, useMemo } from "react"
-import { AoCStats, Member } from "../api/types"
+import { FC, PropsWithChildren, useEffect, useMemo } from "react"
+import { Member } from "../api/types"
 import cx from "clsx"
 import StarDay from "./StarDay"
 import { MouseEventHandler } from "react"
@@ -13,14 +13,14 @@ import Checkbox from "./Checkbox"
 import { useAoCStats } from "../contexts/AocStatsContext"
 
 const DataTable: FC<PropsWithChildren> = ({ children }) => (
-    <table className="border-separate border-spacing-0 w-full">
+    <table className="w-full divide-y divide-gray-700 rounded-lg overflow-hidden border-collapse border-spacing-0">
         {children}
     </table>
 )
 
 const DataTableHeader: FC<PropsWithChildren> = ({ children }) => (
     <thead>
-        <tr className={cx("bg-slate-700")}>{children}</tr>
+        <tr className="bg-slate-700">{children}</tr>
     </thead>
 )
 
@@ -37,7 +37,7 @@ const DataTableHeaderCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({
 }) => (
     <th
         className={cx(
-            "px-4 py-2 border-r-2 border-slate-900 last:border-r-0",
+            "py-3 px-6 w-4 text-xs font-medium tracking-wider text-left uppercase text-gray-400",
             className,
         )}
         onClick={onClick}
@@ -47,7 +47,9 @@ const DataTableHeaderCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({
 )
 
 const DataTableBody: FC<PropsWithChildren> = ({ children }) => (
-    <tbody>{children}</tbody>
+    <tbody className="divide-y  bg-slate-800 divide-slate-700 bg-gradient-to-br from-slate-800 to-slate-900 border-spacing-0 border-collapse">
+        {children}
+    </tbody>
 )
 
 const DataTableCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({
@@ -57,7 +59,7 @@ const DataTableCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({
 }) => (
     <td
         className={cx(
-            "px-4 border-r-2 border-slate-900 last:border-r-0",
+            "p-4 w-4 py-3 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white",
             align === "right" ? "text-right" : null,
             className,
         )}
@@ -186,7 +188,7 @@ const LeaderBoard = () => {
     return (
         <DataTable>
             <DataTableHeader>
-                <DataTableHeaderCell>
+                <DataTableHeaderCell className="text-center">
                     <Checkbox
                         onChange={onToggleAll}
                         checked={filteredMembers.length === members.length}
@@ -238,7 +240,7 @@ const LeaderBoard = () => {
                         globalScore,
                         completionDayLevel,
                     }) => (
-                        <tr key={id} className="even:bg-slate-800">
+                        <tr key={id}>
                             <DataTableCell className="text-center">
                                 <Checkbox
                                     checked={filteredMembers.some(
@@ -252,13 +254,9 @@ const LeaderBoard = () => {
                                     {name}
                                 </span>
                             </DataTableCell>
-                            <DataTableCell align="right">{stars}</DataTableCell>
-                            <DataTableCell align="right">
-                                {localScore}
-                            </DataTableCell>
-                            <DataTableCell align="right">
-                                {globalScore}
-                            </DataTableCell>
+                            <DataTableCell>{stars}</DataTableCell>
+                            <DataTableCell>{localScore}</DataTableCell>
+                            <DataTableCell>{globalScore}</DataTableCell>
                             <DataTableCell>
                                 <StarDay
                                     days={completionDayLevel}
