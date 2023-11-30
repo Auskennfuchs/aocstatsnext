@@ -832,6 +832,116 @@
             "stars": 13,
             "id": 967399,
             "local_score": 56
+        },
+        "1040835": {
+            "id": 1040835,
+            "local_score": 551,
+            "last_star_ts": 1608981315,
+            "global_score": 0,
+            "name": "Michael Schwarz",
+            "stars": 50,
+            "completion_day_level": {
+                "2": {
+                    "2": { "star_index": 225003, "get_star_ts": 1606941807 },
+                    "1": { "get_star_ts": 1606941325, "star_index": 223902 }
+                },
+                "17": {
+                    "2": { "star_index": 2066522, "get_star_ts": 1608246098 },
+                    "1": { "star_index": 2064120, "get_star_ts": 1608242860 }
+                },
+                "11": {
+                    "1": { "get_star_ts": 1607665912, "star_index": 1467703 },
+                    "2": { "get_star_ts": 1607668904, "star_index": 1474181 }
+                },
+                "18": {
+                    "1": { "get_star_ts": 1608270185, "star_index": 2078976 },
+                    "2": { "star_index": 2084880, "get_star_ts": 1608274383 }
+                },
+                "15": {
+                    "1": { "star_index": 1870875, "get_star_ts": 1608021993 },
+                    "2": { "star_index": 1876696, "get_star_ts": 1608026637 }
+                },
+                "5": {
+                    "2": { "star_index": 621413, "get_star_ts": 1607146981 },
+                    "1": { "star_index": 613234, "get_star_ts": 1607145481 }
+                },
+                "14": {
+                    "2": { "star_index": 1767781, "get_star_ts": 1607927309 },
+                    "1": { "star_index": 1763626, "get_star_ts": 1607925077 }
+                },
+                "12": {
+                    "2": { "star_index": 1571792, "get_star_ts": 1607753831 },
+                    "1": { "get_star_ts": 1607751077, "star_index": 1565159 }
+                },
+                "16": {
+                    "1": { "star_index": 1939658, "get_star_ts": 1608097705 },
+                    "2": { "star_index": 1987905, "get_star_ts": 1608146213 }
+                },
+                "8": {
+                    "1": { "get_star_ts": 1607408611, "star_index": 1086997 },
+                    "2": { "get_star_ts": 1607412296, "star_index": 1095089 }
+                },
+                "24": {
+                    "1": { "get_star_ts": 1608812833, "star_index": 2427636 },
+                    "2": { "star_index": 2428800, "get_star_ts": 1608815038 }
+                },
+                "23": {
+                    "1": { "star_index": 2363215, "get_star_ts": 1608703106 },
+                    "2": { "get_star_ts": 1608750049, "star_index": 2392833 }
+                },
+                "22": {
+                    "2": { "star_index": 2311440, "get_star_ts": 1608619851 },
+                    "1": { "get_star_ts": 1608616279, "star_index": 2307975 }
+                },
+                "1": {
+                    "2": { "get_star_ts": 1606838709, "star_index": 1488 },
+                    "1": { "star_index": 0, "get_star_ts": 1606838073 }
+                },
+                "21": {
+                    "1": { "star_index": 2266294, "get_star_ts": 1608552402 },
+                    "2": { "get_star_ts": 1608552913, "star_index": 2266595 }
+                },
+                "25": {
+                    "1": { "get_star_ts": 1608981212, "star_index": 2493586 },
+                    "2": { "get_star_ts": 1608981315, "star_index": 2493615 }
+                },
+                "10": {
+                    "1": { "get_star_ts": 1607577156, "star_index": 1349081 },
+                    "2": { "get_star_ts": 1607662320, "star_index": 1459488 }
+                },
+                "7": {
+                    "1": { "star_index": 925978, "get_star_ts": 1607319019 },
+                    "2": { "get_star_ts": 1607322414, "star_index": 935971 }
+                },
+                "9": {
+                    "1": { "star_index": 1217982, "get_star_ts": 1607491138 },
+                    "2": { "star_index": 1228178, "get_star_ts": 1607493330 }
+                },
+                "19": {
+                    "1": { "get_star_ts": 1608386915, "star_index": 2162115 },
+                    "2": { "star_index": 2166339, "get_star_ts": 1608392740 }
+                },
+                "13": {
+                    "2": { "star_index": 1676009, "get_star_ts": 1607843894 },
+                    "1": { "star_index": 1666226, "get_star_ts": 1607836986 }
+                },
+                "4": {
+                    "1": { "star_index": 454691, "get_star_ts": 1607060682 },
+                    "2": { "get_star_ts": 1607061990, "star_index": 459225 }
+                },
+                "20": {
+                    "2": { "get_star_ts": 1608461449, "star_index": 2206518 },
+                    "1": { "star_index": 2200727, "get_star_ts": 1608450193 }
+                },
+                "6": {
+                    "1": { "star_index": 768619, "get_star_ts": 1607231594 },
+                    "2": { "get_star_ts": 1607232288, "star_index": 773971 }
+                },
+                "3": {
+                    "2": { "get_star_ts": 1607014232, "star_index": 377543 },
+                    "1": { "get_star_ts": 1607013606, "star_index": 376107 }
+                }
+            }
         }
     },
     "owner_id": 822621,
