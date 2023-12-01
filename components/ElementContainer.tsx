@@ -13,6 +13,8 @@ const ElementContainer = forwardRef<HTMLDivElement, PropsWithChildren>(
     },
 )
 
+ElementContainer.displayName = "ElementContainer"
+
 export const ModeSwitchContainer: FC<PropsWithChildren> = ({ children }) => (
     <div
         className="inline-flex gap-2 items-center -mr-4 -mt-10"
