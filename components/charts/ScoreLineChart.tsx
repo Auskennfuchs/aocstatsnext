@@ -23,8 +23,8 @@ interface DayScores {
 
 const viewOptions = [
     { value: "total", label: "total" },
-    { value: "day1", label: "day 1" },
-    { value: "day2", label: "day 2" },
+    { value: "part1", label: "part 1" },
+    { value: "part2", label: "part 2" },
 ] as const
 
 type ViewOptionsValues = (typeof viewOptions)[number]["value"]
@@ -65,11 +65,11 @@ const ScoreLineChart = () => {
                         (memberScoresP2.find((m) => m.name === name)?.score ||
                             0)
                     )
-                case "day1":
+                case "part1":
                     return (
                         memberScoresP1.find((m) => m.name === name)?.score || 0
                     )
-                case "day2":
+                case "part2":
                     return (
                         memberScoresP2.find((m) => m.name === name)?.score || 0
                     )
