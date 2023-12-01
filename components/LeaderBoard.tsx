@@ -122,8 +122,8 @@ const LeaderBoard = () => {
         [],
     )
 
-    const [sortMode, setSortMode] = useState<keyof typeof sortFields>("name")
-    const [sortDirection, setSortDirection] = useState<"ASC" | "DESC">("ASC")
+    const [sortMode, setSortMode] = useState<keyof typeof sortFields>("score")
+    const [sortDirection, setSortDirection] = useState<"ASC" | "DESC">("DESC")
 
     useEffect(() => {
         setFilteredMembers(members.map(({ id }) => id))
