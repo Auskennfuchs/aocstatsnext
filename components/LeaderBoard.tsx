@@ -59,7 +59,7 @@ const DataTableCell: FC<PropsWithChildren<DataTableHeaderCellProps>> = ({
 }) => (
     <td
         className={cx(
-            "p-4 w-4 py-3 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white",
+            "p-4 w-4 py-3 px-6 text-sm font-medium whitespace-nowrap text-white",
             align === "right" ? "text-right" : null,
             className,
         )}
