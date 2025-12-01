@@ -50,7 +50,7 @@ const convertMember = (m: any, event: number): Member => {
     const { name, id, stars } = m
 
     return {
-        name,
+        name:name||`Anonymous #${id}`,
         id,
         stars,
         localScore: m.local_score,
